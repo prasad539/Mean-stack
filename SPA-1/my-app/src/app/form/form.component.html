@@ -1,0 +1,32 @@
+<div>
+    
+    <div class="form-group">
+    <input type="text" class="form-control"  placeholder="Search name here" [(ngModel)]="searchByName"
+    style="width:400px; margin-left:500px;" name="searchText">
+    </div><br>
+
+<div >
+    <table class="table table-bordered table-condensed">
+
+    <tr class="thead-dark">
+       <th>Name</th>
+       <th>Contact</th>
+       <th>Date Of Joining</th>
+       <th>Mail</th>
+       <th colspan="2" class="text-center">Menu</th>
+    </tr>
+
+    <tr *ngFor="let d of displayMessage | employeeFilter:searchByName ; index as i">
+      <td>{{d.ename}}</td>
+      <td>{{d.cnumber}}</td>
+      <td>{{d.doj}}</td>
+      <td>{{d.mail}}</td>
+      <td><button class="btn btn-danger mr-3" (click)="delete(d)">Remove</button>
+          <button type="button" class="btn btn-primary" (click)="edit(i)">Edit</button>
+      </td>
+    </tr>
+
+  </table>
+</div>
+</div>
+

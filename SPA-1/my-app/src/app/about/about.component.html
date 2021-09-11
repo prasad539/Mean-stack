@@ -1,0 +1,21 @@
+<form #eForm="ngForm">
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/about" routerLinkActive="active" style="color: white;">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/create"  routerLinkActive="active" style="color: white;">Create</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/list" routerLinkActive="active" style="color: white;">List</a>
+      </li>
+    </ul>
+  
+    
+  </nav><br><br>
+
+  <router-outlet></router-outlet>
+  </form>

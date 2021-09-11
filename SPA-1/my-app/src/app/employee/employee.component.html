@@ -1,0 +1,310 @@
+<div class="container card " *ngFor="let e of employeeData ; let i=index">  
+    <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm.value) ;empForm.reset()" >
+            
+        <div class=" card-header bg-primary text-white text-center" >
+            <h3 >Employee Form</h3>
+        </div>
+    
+        <span style="color: red;">*</span><span >Required field</span><br><br>
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="e._id">
+        <div class="form-group">
+            <label for="ename" class="control-label-"><b>Employee Full Name:</b></label><span style="color: red;">*</span><br>
+            <input type="text" id="ename" class="form-control " name="ename" #ename="ngModel" [(ngModel)]="e.name" 
+            placeholder="Enter full name"
+            required
+            minlength="2"
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$">
+    
+            <div *ngIf="(ename.touched || ename.dirty) && ename.invalid" class="alert alert-danger">
+                <div *ngIf="ename.errors.required">Employee name is required</div>
+                <div *ngIf="ename.errors.minlength">Name must be at least 2 chars long</div>
+                <div *ngIf="ename.errors.pattern">No special characters allowed</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label><b>Date of Joining:</b></label><span style="color: red;">*</span>
+            <input type="date" class="form-control" name="doj" #doj="ngModel" [(ngModel)]="e.joiningDate" required>
+            <div *ngIf="(doj.touched || doj.dirty) && doj.invalid" class="alert alert-danger">
+                <div *ngIf="doj.errors.required">Date must be selected</div>
+            </div>
+        </div>
+    
+        <div class="form-group">  
+            <label><b>Contact Number:</b></label><span style="color: red;">*</span><br>
+            <input type="number"  class="form-control" name="cnumber" #cnumber="ngModel" [(ngModel)]="e.contactNumber"
+              placeholder="Enter contact number"
+              pattern="^[7-9][0-9]{9}$" 
+              required
+              maxlength="10" 
+              minlength="10">  
+    
+              <div *ngIf="(cnumber.touched || cnumber.dirty) && cnumber.invalid" class="alert alert-danger">
+                 <div *ngIf="cnumber.errors.required">Contact number required</div>
+                 <div *ngIf="cnumber.errors.pattern">Please enter a valid contact number</div>
+             </div>
+        </div>
+    
+        <div class="form-group">
+            <label><b>Email ID:</b><span style="color: red;">*</span></label>
+            <input type="email" class="form-control" name="mail" #mail="ngModel" [(ngModel)]="e.email"
+            placeholder="Enter valid email id"
+            required 
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$" >
+    
+            <div *ngIf="(mail.touched || mail.dirty) && mail.invalid" class="alert alert-danger">
+                <div *ngIf="mail.errors.required">Email is required</div>
+                <div *ngIf="mail.errors.pattern">Please enter a valid email id</div>
+            </div>
+        </div>
+        
+        <div class="form-group ">
+            <label><b>Select Date of birth:</b></label><span style="color: red;">*</span>
+            <input type="date" class="form-control" name="dob" #dob="ngModel" [(ngModel)]="e.birthDate" required>
+            
+            <div *ngIf="(dob.touched || dob.dirty) && dob.invalid" class="alert alert-danger">
+                <div *ngIf="dob.errors.required">Date must be selected</div>
+            </div>
+        </div>
+    
+        <div>
+             <label><b>Select Marital Status:</b></label><span style="color: red;">*</span><br>
+             <div class="custom-control custom-radio">
+                 <input type="radio" class="custom-control-input" name="status" value="married" required id="cust1" #status="ngModel" [(ngModel)]="e.maritalStatus">
+                 <label class="custom-control-label" for="cust1">Married</label>  
+             </div>
+             <div class="custom-control custom-radio">
+                  <input type="radio" class="custom-control-input" name="status" value="Unmarried" required id="cust2" #status="ngModel" [(ngModel)]="e.maritalStatus">
+                  <label class="custom-control-label" for="cust2">Unmarried</label><br><br>
+             </div>
+             <div *ngIf="status.touched  && status.invalid" class="alert alert-danger">
+                   <div *ngIf="status.errors.required" >Status is required</div>
+             </div>
+       </div>
+    
+       
+      
+            <div class="form-group">
+                <label><b>Select Qualification:</b><span style="color: red;">*</span></label>
+                <select  class="custom-select form-control" id="qual" name="option" #option="ngModel" [(ngModel)]="e.qualf" required>
+                     
+                <option value="BE">BE</option>
+                <option value="BTech">BTech</option>
+                <option value="ME">ME</option>
+                <option value="MCA">MCA</option>
+                <option value="MTech">MTech</option>
+                <option value="BCS">BCS</option>
+                <option value="MCS">MCS</option>
+                </select>
+            
+                <div *ngIf="option.touched && option.invalid" class="alert alert-danger">
+                    <div *ngIf="option.errors.required">Qualification must be selected</div>
+                </div>
+            </div>
+    
+        <div>
+                <label ><b>Select Gender:</b></label><span style="color: red;">*</span><br>
+            <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" name="Gender" value="Male" required id="cust3" #Gender="ngModel" [(ngModel)]="e.employeeGender">
+                <label class="custom-control-label" for="cust3">Male</label> 
+            </div>
+             <div class="custom-control custom-radio ">
+                <input type="radio" class="custom-control-input" name="Gender" value="Female" required id="cust4" #Gender="ngModel" [(ngModel)]="e.employeeGender">
+                <label class="custom-control-label" for="cust4">Female</label> 
+            </div>
+            <div class="custom-control custom-radio ">
+                <input type="radio" class="custom-control-input" name="Gender" value="other" required id="cust5" #Gender="ngModel" [(ngModel)]="e.employeeGender">
+                <label class="custom-control-label" for="cust5">Other</label><br><br>
+            </div>
+            <div *ngIf="Gender.touched  && Gender.invalid" class="alert alert-danger">
+                <div *ngIf="Gender.errors.required" >Gender is required</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label><b>Joining Reference:</b></label><span style="color: red;">*</span>
+            <input type="text" name="reference" class="form-control" #reference="ngModel" [(ngModel)]="e.joiningReference" 
+            placeholder="Enter joining reference"
+            required
+            minlength="2"
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$">
+    
+            <div *ngIf="(reference.touched || reference.dirty) && reference.invalid" class="alert alert-danger">
+                <div *ngIf="reference.errors.required"> Name is required</div>
+                <div *ngIf="reference.errors.minlength">Name must be at least 2 chars long</div>
+                <div *ngIf="reference.errors.pattern">No special characters allowed</div>
+            </div>
+        </div>
+    
+        
+            <label ><b>Department:</b></label><span style="color: red;">*</span><br>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="Dept" value="Engg"  checked required id="cust6" #Dept="ngModel" [(ngModel)]="employeeData.employeeDepartment">
+            <label class="custom-control-label " for="cust6">Engineering</label><br><br>
+           <div *ngIf="Dept.touched  && Dept.invalid" class="alert alert-danger">
+                <div *ngIf="Dept.errors.required" >Department is required</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label><b>Designation:</b></label><span style="color: red;">*</span>
+            <input type="text" name="Designation" class="form-control" #Designation="ngModel" [(ngModel)]="e.designation" 
+            placeholder="Enter Designation" 
+            required
+            minlength="2"
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$"><br>
+    
+            <div *ngIf="(Designation.touched || Designation.dirty) && Designation.invalid" class="alert alert-danger">
+                <div *ngIf="Designation.errors.required">Designation is required</div>
+                <div *ngIf="Designation.errors.minlength">Designation must be at least 2 chars long</div>
+                <div *ngIf="Designation.errors.pattern">No special characters allowed</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label><b>Reporting Person:</b></label><span style="color: red;">*</span>
+            <input type="text" name="reporting" class="form-control" #reporting="ngModel" [(ngModel)]="e.reportingPerson" 
+            placeholder="Enter name of reporting person"
+            required
+            minlength="2"
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$">
+    
+            <div *ngIf="(reporting.touched || reporting.dirty) && reporting.invalid" class="alert alert-danger">
+                <div *ngIf="reporting.errors.required"> Name is required</div>
+                <div *ngIf="reporting.errors.minlength">Name must be at least 2 chars long</div>
+                <div *ngIf="reporting.errors.pattern">No special characters allowed</div>
+            </div>
+        </div>
+    
+        <div class="form-group ">
+            <label><b>Temporary Address:</b></label><span style="color: red;">*</span><br>
+            <textarea rows="2" cols="70" name="TempAddress" class="form-control" #TempAddress="ngModel" [(ngModel)]="e.temporaryAddress"
+            placeholder="Enter address here"
+            required
+            minlength="10"></textarea>
+            <div *ngIf="(TempAddress.touched || TempAddress.dirty) && TempAddress.invalid" class="alert alert-danger">
+                <div *ngIf="TempAddress.errors.required"> Address is required</div>
+                <div *ngIf="TempAddress.errors.minlength">Address must be at least 10 chars long</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label><b>Permanent Address:</b></label><span style="color: red;">*</span><br>
+            <textarea rows="2" cols="70" name="PerAddress" class="form-control" #PerAddress="ngModel" [(ngModel)]="e.permanentAddress"
+            placeholder="Enter address here"
+            required 
+            minlength="4"></textarea>
+            <div *ngIf="(PerAddress.touched || PerAddress.dirty) && PerAddress.invalid" class="alert alert-danger">
+                <div *ngIf="PerAddress.errors.required">Address is required</div>
+                <div *ngIf="PerAddress.errors.minlength">Address must be at least 4 chars long</div>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <label><b>Emergency Contact Number:</b></label><span style="color: red;">*</span><br>
+            <input type="number" name="emergency" class="form-control" placeholder="Enter emeregency contact here"
+            #emergency="ngModel" [(ngModel)]="e.emergencyContact" 
+            pattern="^[7-9][0-9]{9}$" 
+            required 
+            maxlength="10" 
+            minlength="10">
+            <div *ngIf="(emergency.touched || emergency.dirty) && emergency.invalid" class="alert alert-danger">
+                <div *ngIf="emergency.errors.required">Contact number required</div>
+                <div *ngIf="emergency.errors.pattern">Please enter a valid contact number</div>
+            </div>
+        </div>
+    
+        <div class="form-group ">
+            <label><b>Aadhar Number:</b></label><span style="color: red;">*</span><br>
+            <input type="number" name="aadhar" class="form-control" placeholder="Enter aadhar number"
+            #aadhar="ngModel" [(ngModel)]="e.aadharNumber"
+            required
+            maxlength="12" 
+            minlength="12" 
+            pattern="^[0-9]{12}$">
+             <div *ngIf="(aadhar.touched || aadhar.dirty) && aadhar.invalid" class="alert alert-danger">
+                <div *ngIf="aadhar.errors.required">Aadhar number required</div>
+                <div *ngIf="aadhar.errors.pattern">Please enter a valid aadhar number</div>
+            </div>
+        </div>
+    
+       
+    
+        <div class="form-group ">
+            <label><b>PAN Number:</b></label><span style="color: red;">*</span><br>
+            <input type="text" name="pan" class="form-control" placeholder="Enter PAN number"
+            #pan="ngModel" [(ngModel)]="e.panNumber"
+            required 
+            maxlength="10" 
+            minlength="10"
+            pattern="^[A-Z]{5}[0-9]{4}[A-Z]{1}$">
+            <div *ngIf="(pan.touched || pan.dirty) && pan.invalid" class="alert alert-danger">
+                <div *ngIf="pan.errors.required">PAN number required</div>
+                <div *ngIf="pan.errors.pattern">Please enter a valid PAN number</div>
+            </div>
+        </div>
+    
+        <div class="form-group ">
+            <label><b>Driving Licence Number:</b></label><span style="color: red;">*</span><br>
+            <input type="text" name="licence" class="form-control" placeholder="Enter licence number"
+            #licence="ngModel" [(ngModel)]="e.licenceNumber"
+            required 
+            maxlength="15"
+            minlength="15"
+            pattern="^[A-Z]{2}[0-9]{13}$">
+            <div *ngIf="(licence.touched || licence.dirty) && licence.invalid" class="alert alert-danger">
+                <div *ngIf="licence.errors.required">Licence number required</div>
+                <div *ngIf="licence.errors.pattern">Please enter a valid licence number</div>
+            </div>
+        </div>
+    
+        <div>
+            <label><b>Do you have a passport?</b></label><span style="color: red;">*</span><br>
+            <div class="custom-control custom-radio ">
+                 <input type="radio" class="custom-control-input" name="passport" value="Yes" required #passport="ngModel" id="pass1" [(ngModel)]="e.employeePassport">
+                 <label class="custom-control-label" for="pass1">Yes</label>
+            </div>
+            <div class="custom-control custom-radio ">
+                <input type="radio" class="custom-control-input" name="passport" value="No" required #passport="ngModel" id="pass2" [(ngModel)]="e.employeePassport">
+                <label class="custom-control-label" for="pass2">No</label>
+            </div>
+        
+            <div *ngIf="passport.touched  && passport.invalid" class="alert alert-danger">
+                <div *ngIf="passport.errors.required" >Select one option</div>
+            </div>
+        </div>
+    
+        <div class="form-group ">
+            <label><b>Select Blood Group:</b></label><span style="color: red;">*</span>
+            <select class="custom-select form-control" id="bg" name="blood" #blood="ngModel" [(ngModel)]="e.bloodGroup" required>
+                
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+            <div *ngIf="blood.touched && blood.invalid" class="alert alert-danger">
+                <div *ngIf="blood.errors.required">Select blood group</div>
+            </div>
+        </div>
+    
+        <div class="form-group ">
+            <label><b>Remark:</b></label><br>
+            <textarea rows="2" cols="70" name="remark" class="form-control" #remark="ngModel" [(ngModel)]="e.employeeRemark"
+            placeholder="Enter remarks here(if any)"></textarea>
+        </div>
+    
+        <div class="text-right">
+            <button [disabled]="!empForm.form.valid" type="submit" *ngIf="!isUpdate"  class="btn btn-primary">Submit</button>
+            <button [disabled]="!empForm.form.valid" type="submit" *ngIf="isUpdate"  (click)="update()" class="btn btn-primary">Update</button>
+        </div><br><br><br>
+    
+    </form>
+    </div>
+    
+
+    
